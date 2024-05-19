@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coba Tailwind</title>
+    <link href="src/output.css" rel="stylesheet">
+    <script src="//unpkg.com/alpinejs" defer></script>
+
+</head>
+<body>
+<div class="area">
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+<!-- Header Start -->
+<header class=" bg-transparent absolute top-0 left-0 w-full flex items-center z-10">
+    <div class="xl:container">
+        <div class="flex items-center justify-between relative">
+            <div class="px-4 flex justify-center items-center">
+                <div class="mr-1 w-9 h-14 rounded-lg overflow-hidden items-center justify-center">
+                    <img src="dist/Logo-Kabupaten-Probolinggo.jpg" alt="" class="object-cover">
+                </div>
+                <div class="bg-slate-500 rounded-lg overflow-hidden items-center justify-center">
+                    <img src="dist/DINKES.png" alt="" class="object-cover h-9">
+                </div>
+            </div>
+            <div class="flex items-center px-4">
+                <button id="hamburger" name="hamburger" type="button" class="block absolute right-4 lg:hidden">
+                    <span class="hamburger-line transition duration-300 ease-in-out origin-top-left"></span>
+                    <span class="hamburger-line transition duration-300 ease-in-out"></span>
+                    <span class="hamburger-line transition duration-300 ease-in-out origin-bottom-left"></span>
+                </button>
+
+                <nav 
+                x-data="{
+                    navigationMenuOpen: false,
+                    navigationMenu: '',
+                    navigationMenuCloseDelay: 200,
+                    navigationMenuCloseTimeout: null,
+                    navigationMenuLeave() {
+                    let that = this;
+                    this.navigationMenuCloseTimeout = setTimeout(() => {
+                    that.navigationMenuClose();
+                    }, this.navigationMenuCloseDelay);
+                    },
+                    navigationMenuReposition(navElement) {
+                    this.navigationMenuClearCloseTimeout();
+                    this.$refs.navigationDropdown.style.left = navElement.offsetLeft + 'px';
+                    this.$refs.navigationDropdown.style.marginLeft = (navElement.offsetWidth/2) + 'px';
+                    },
+                    navigationMenuClearCloseTimeout(){
+                    clearTimeout(this.navigationMenuCloseTimeout);
+                    },
+                    navigationMenuClose(){
+                    this.navigationMenuOpen = false;
+                    this.navigationMenu = '';
+                    }
+                    }"
+                id="nav-menu" class="hidden absolute py-5 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none">
+                    <ul class="block lg:flex">
+                        <li class="group">
+                            <a href="" class="nav-hover">Beranda</a>
+                        </li>
+                        <li class="group">
+                            <a href="" class="nav-hover">Portofolio</a>
+                        </li>
+                        <li class="group">
+                            <a href="" class="nav-hover">Blog</a>
+                        </li>
+        
+
+                <!-- nyoba -->
+
+                        <li class="group">
+                            <button :class="{ 'bg-neutral-100' : navigationMenu=='learn-more', 'hover:bg-neutral-100' : navigationMenu!='learn-more' }" @mouseover="navigationMenuOpen=true; navigationMenuReposition($el); navigationMenu='learn-more'" @mouseleave="navigationMenuLeave()" 
+                            class="nav-hover">
+                            <span>Unduhan</span>
+                            <svg :class="{ '-rotate-180' : navigationMenuOpen==true && navigationMenu == 'learn-more' }" class="relative top-[1px] ml-1 h-3 w-3 ease-out duration-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </button>
+                        </li>
+                        <li class="group">
+                            <a href="#_" class="nav-hover">
+                            Documentation
+                            </a>
+                        </li>
+                    </ul>
+    <div x-ref="navigationDropdown" x-show="navigationMenuOpen"
+        x-transition:enter="transition ease-out duration-100"
+        x-transition:enter-start="opacity-0 scale-90"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-100"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-90"
+        @mouseover="navigationMenuClearCloseTimeout()" @mouseleave="navigationMenuLeave()"
+        class="absolute top-3 pt-3 duration-200 ease-out -translate-x-1/2 translate-y-11" x-cloak>
+        <div class="flex justify-center w-auto h-auto overflow-hidden bg-white border rounded-md shadow-sm border-neutral-200/70">
+
+            <div x-show="navigationMenu == 'learn-more'" class="flex items-stretch justify-center w-full p-6">
+                <div class="w-72">
+                    <a href="#_" @click="navigationMenuClose()" class="block px-3.5 py-3 text-sm rounded hover:bg-neutral-100">
+                        <span class="block mb-1 font-medium text-black">Tailwind CSS</span>
+                    </a>
+                    <a href="#_" @click="navigationMenuClose()" class="block px-3.5 py-3 text-sm rounded hover:bg-neutral-100">
+                        <span class="block mb-1 font-medium text-black">Laravel</span>
+                    </a>
+                    <a href="#_" @click="navigationMenuClose()" class="block px-3.5 py-3 text-sm rounded hover:bg-neutral-100">
+                        <span class="block mb-1 font-medium text-black">Pines UI</span>
+                    </a>
+                    <a href="#_" @click="navigationMenuClose()" class="block px-3.5 py-3 text-sm rounded hover:bg-neutral-100">
+                        <span class="block mb-1 font-medium text-black">ApineJS</span>
+                    </a>
+                    <a href="#_" @click="navigationMenuClose()" class="block px-3.5 py-3 text-sm rounded hover:bg-neutral-100">
+                        <span class="block mb-1 font-medium text-black">Livewire</span>
+                    </a>
+                    <a href="#_" @click="navigationMenuClose()" class="block px-3.5 py-3 text-sm rounded hover:bg-neutral-100">
+                        <span class="block mb-1 font-medium text-black">Tails</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+                <!-- nyoba end -->
+
+
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Header End -->
+
+<!-- carousel start -->
+<section class="mt-20">
+    <div class="xl:container">
+        <img src="dist/s1.png" alt="car 1" class="object-cover w-full" />
+    </div>
+</section>
+<!-- carousel end -->
+
+<section>
+    <div class="w-full h-2 max-w-6xl mx-auto"
+    style="background-image: linear-gradient(90deg, rgba(120, 208, 243, 0) 1.46%, rgba(80, 180, 241, 0.6) 40.83%, rgba(149, 131, 198, 0.3) 65.57%, rgba(43, 168, 217, 0) 107.92%);">
+    </div>
+    <div class="h-16 justify-center items-center">
+        <!-- tulisan berjalan -->
+        <div class="w-full h-full flex justify-center items-center">
+            <h1 id="typewriter" class="text-2xl font-bold"></h1>
+        </div>
+        
+        <script>
+        const words = ["Selamat Datang di Website Resmi Dinas Kesehatan Kabupaten Probolinggo", "Sehat dimulai dari Saya, Anda, Kita Semua !"];
+        let i = 0;
+        let j = 0;
+        let currentWord = "";
+        let isDeleting = false;
+        
+        function type() {
+          currentWord = words[i];
+          if (isDeleting) {
+            document.getElementById("typewriter").textContent = currentWord.substring(0, j-1);
+            j--;
+            if (j == 0) {
+              isDeleting = false;
+              i++;
+              if (i == words.length) {
+                i = 0;
+              }
+            }
+          } else {
+            document.getElementById("typewriter").textContent = currentWord.substring(0, j+1);
+            j++;
+            if (j == currentWord.length) {
+              isDeleting = true;
+            }
+          }
+          setTimeout(type, 100);
+        }
+        
+        type();
+        </script>
+        <!-- tulisan berjalan end -->
+    </div>
+</section>
+
+<!-- Layar hero start-->
+<section id="home" class="pt-8 hidden">
+    <div class="container">
+        <div class="flex flex-wrap">
+            <div class="w-full self-center px-4 lg:w-1/2">
+                <h1 class="text-base font-semibold text-primary">Helo Semua, Saya <span class="block font-bold text-dark text-4xl">Andik Hidayat</span></h1>
+                <h2 class="font-medium text-slate-500 text-lg mb-5">Developer & <span class="text-dark">Malaser</span></h2>
+                <p class="font-medium text-slate-400 mb-10">Belajar Web Programming menyenangkan bukan, <span class="text-dark font-bold">Bukan!</span></p>
+                <a href="#" class="text-base font-semibold text-white bg-primary py-3 px-8 rounded-full hover:shadow-lg hover:opacity-80 transition duration-300 ease-in-out">Hubungi Kami</a>
+            </div>
+            <div class="w-full self-end px-4 lg:w-1/2">
+                <div class="mt-10">
+                    <img src="dist/izzy.jpg" alt="Andik" class="max-w-full mx-auto h-48"> 
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Layar hero end -->
+
+
+<!-- About start -->
+<section id="about" class="pt-36 pb-32 hidden">
+    <div class="container ">
+        <div class="flex flex-wrap">
+            <div class="w-full px-4 mb-10 lg:w-2/3">
+                <h4 class="font-bold uppercase text-pretty text-lg mb-3">Tentang saya</h4>
+                <h2 class="font-bold text-dark text-3xl mb-5 max-w-xl">yuk belajar web</h2>
+                <p class="font-medium text-base text-slate-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam?</p>
+            </div>
+            <div class="w-full px-4 lg:w-1/3">
+                <h3>Mari Berteman</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo eligendi excepturi qui rerum assumenda repellendus, quia optio incidunt?</p>
+                <div class="flex items-center my-2">
+                    <!-- youtube -->
+                    <a href="#" target="_blank" class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border border-slate-300 hover:border-primary hover:bg-primary hover:text-white">
+                        <svg role="img" width="20" class="fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>YouTube</title><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                    <a href="#" target="_blank" class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border border-slate-300 hover:border-primary hover:bg-primary hover:text-white">
+                        <svg role="img" width="20" class="fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg>
+                    </a>
+                    <a href="#" target="_blank" class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border border-slate-300 hover:border-primary hover:bg-primary hover:text-white">
+                        <svg role="img" width="20" class="fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>TikTok</title><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- About end -->
+
+<!-- About start -->
+<section id="about" class="pt-11 pb-32">
+    <div class="xs:container ">
+        <div class="flex flex-wrap">
+            <div class="w-full px-4 mb-10 lg:w-2/3">
+                <!-- berita terbaru -->
+                <h3 class="flex items-center w-full mb-4">
+                    <span class="flex-grow bg-primary rounded h-1"></span>
+                    <button class="flex items-center justify-center mx-3 text-md font-medium border-2 border-primary px-6 py-0.5 rounded-full hover:bg-gray-200">
+                        <svg class="w-6 h-6 mr-3" viewBox="0 0 1024 1024" fill="#000000" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M975.928 744.598a8.006 8.006 0 0 1-7.856-6.608l-55.538-314.996a7.998 7.998 0 0 1 6.482-9.262c4.216-0.774 8.48 2.124 9.26 6.48l55.54 314.998a8.002 8.002 0 0 1-7.888 9.388zM984.268 791.84a7.99 7.99 0 0 1-7.856-6.606c-7.214-40.824-163.534-48.354-260.38-43.464-4.826 0.218-8.184-3.186-8.386-7.59a7.974 7.974 0 0 1 7.574-8.372c27.098-1.376 264.926-11.34 276.938 56.646a7.992 7.992 0 0 1-6.482 9.26c-0.47 0.094-0.94 0.126-1.408 0.126z" fill=""></path><path d="M676.722 521.292a8 8 0 0 1-7.858-6.606 8 8 0 0 1 6.482-9.264c67.906-11.994 241.374-58.66 228.848-129.69a7.998 7.998 0 0 1 6.48-9.262c4.25-0.774 8.496 2.124 9.262 6.48 7.686 43.528-31.5 81.814-116.46 113.792-60.91 22.918-124.708 34.312-125.35 34.422a7.408 7.408 0 0 1-1.404 0.128z" fill=""></path><path d="M912.05 382.34a7.992 7.992 0 0 1-7.856-6.614 7.998 7.998 0 0 1 6.48-9.262l31.518-5.544c4.28-0.688 8.512 2.14 9.262 6.498a7.996 7.996 0 0 1-6.482 9.262l-31.516 5.542a8.534 8.534 0 0 1-1.406 0.118z" fill=""></path><path d="M1015.754 786.296a8.006 8.006 0 0 1-7.856-6.608l-72.186-409.5a7.996 7.996 0 0 1 6.48-9.262c4.28-0.774 8.496 2.124 9.262 6.482l72.186 409.5a8 8 0 0 1-7.886 9.388z" fill=""></path><path d="M984.268 791.84a7.992 7.992 0 0 1-1.374-15.868l31.484-5.542c4.232-0.812 8.48 2.108 9.262 6.48a8 8 0 0 1-6.48 9.262l-31.486 5.542a7.112 7.112 0 0 1-1.406 0.126zM558.12 769.554a8.006 8.006 0 0 1-7.856-6.608l-38.888-220.492a7.912 7.912 0 0 1 1.328-5.966 7.86 7.86 0 0 1 5.154-3.294l157.49-27.77c4.232-0.794 8.48 2.124 9.262 6.482a7.998 7.998 0 0 1-6.482 9.262l-149.62 26.378 36.11 204.75 149.62-26.378c4.28-0.796 8.496 2.124 9.26 6.48a8 8 0 0 1-6.48 9.262l-157.49 27.77c-0.472 0.078-0.94 0.124-1.408 0.124z" fill=""></path><path d="M558.134 769.554a7.24 7.24 0 0 1-1.638-0.172l-84.306-17.618a7.96 7.96 0 0 1-6.23-6.436l-27.77-157.49a7.974 7.974 0 0 1 3.656-8.184l73.184-45.384a8.13 8.13 0 0 1 7.482-0.5 7.966 7.966 0 0 1 4.606 5.904l38.888 220.492a7.944 7.944 0 0 1-2.31 7.122 7.934 7.934 0 0 1-5.562 2.266z m-77.37-32.346l67.44 14.104-34.782-197.238-58.552 36.328 25.894 146.806zM710.05 710.27a8.004 8.004 0 0 1-7.856-6.608l-27.77-157.49a8 8 0 0 1 6.48-9.262c4.282-0.796 8.496 2.11 9.262 6.482l27.77 157.49a8 8 0 0 1-7.886 9.388z" fill=""></path><path d="M483.092 620.374a7.98 7.98 0 0 1-7.856-6.608 8.016 8.016 0 0 1 6.48-9.278l15.744-2.748c4.28-0.75 8.496 2.124 9.26 6.498a7.974 7.974 0 0 1-6.48 9.244l-15.744 2.782a10.708 10.708 0 0 1-1.404 0.11zM499.74 714.876a7.98 7.98 0 0 1-7.856-6.622 7.974 7.974 0 0 1 6.496-9.246l15.776-2.78c4.278-0.718 8.48 2.154 9.244 6.496a8.014 8.014 0 0 1-6.496 9.278l-15.774 2.748a6.954 6.954 0 0 1-1.39 0.126zM491.432 667.632a8.006 8.006 0 0 1-7.856-6.608 8 8 0 0 1 6.48-9.262l15.744-2.78c4.216-0.812 8.482 2.11 9.26 6.48a8 8 0 0 1-6.48 9.262l-15.744 2.782c-0.466 0.08-0.936 0.126-1.404 0.126zM533.6 538.41a7.994 7.994 0 0 1-1.376-15.868l31.486-5.56c4.216-0.774 8.48 2.124 9.262 6.48a7.998 7.998 0 0 1-6.482 9.262l-31.484 5.56c-0.468 0.08-0.938 0.126-1.406 0.126zM773.038 975.242a7.982 7.982 0 0 1-7.138-4.406l-75.028-149.148c-1.984-3.954-0.406-8.762 3.544-10.73 3.904-2 8.73-0.422 10.73 3.544l75.028 149.15c1.984 3.952 0.406 8.762-3.544 10.73a7.8 7.8 0 0 1-3.592 0.86zM694.292 989.14a7.98 7.98 0 0 1-7.136-4.404l-75.03-149.182c-1.982-3.952-0.404-8.762 3.546-10.728 3.92-2 8.73-0.438 10.728 3.544l75.03 149.182c1.982 3.952 0.406 8.762-3.546 10.728a7.764 7.764 0 0 1-3.592 0.86z" fill=""></path><path d="M678.502 991.906a7.992 7.992 0 0 1-7.856-6.608 7.992 7.992 0 0 1 6.48-9.262l110.264-19.444c4.246-0.796 8.48 2.108 9.26 6.48a8 8 0 0 1-6.48 9.262l-110.262 19.446a6.964 6.964 0 0 1-1.406 0.126zM582.204 814.034a8 8 0 0 1-7.856-6.606l-3.124-17.726a7.992 7.992 0 0 1 6.482-9.262c4.232-0.812 8.48 2.124 9.26 6.482l3.124 17.726a8 8 0 0 1-7.886 9.386z" fill=""></path><path d="M582.204 814.034a8.004 8.004 0 0 1-7.872-6.636 8.01 8.01 0 0 1 6.528-9.246l141.81-24.52a8.08 8.08 0 0 1 9.244 6.528 8.01 8.01 0 0 1-6.528 9.246l-141.81 24.52c-0.452 0.06-0.92 0.108-1.372 0.108z" fill=""></path><path d="M724.012 789.514a8.004 8.004 0 0 1-7.856-6.608l-2.78-15.742a8 8 0 0 1 6.48-9.262c4.264-0.796 8.496 2.124 9.262 6.482l2.78 15.742a8 8 0 0 1-7.886 9.388zM1015.77 527.868a7.99 7.99 0 0 1-7.996-7.996V40.092c0-4.42 3.576-7.998 7.996-7.998s7.996 3.578 7.996 7.998v479.78a7.99 7.99 0 0 1-7.996 7.996zM104.186 751.766a7.992 7.992 0 0 1-7.996-7.996V40.092a7.994 7.994 0 0 1 7.996-7.998 7.994 7.994 0 0 1 7.998 7.998v703.678a7.992 7.992 0 0 1-7.998 7.996z" fill=""></path><path d="M56.208 799.742a7.99 7.99 0 0 1-7.996-7.996 7.992 7.992 0 0 1 7.996-7.996c22.052 0 39.982-17.93 39.982-39.98a7.992 7.992 0 0 1 7.996-7.996 7.992 7.992 0 0 1 7.998 7.996c0 30.858-25.114 55.972-55.976 55.972z" fill=""></path><path d="M56.208 799.742c-30.862 0-55.974-25.114-55.974-55.972 0-4.42 3.576-7.996 7.996-7.996s7.996 3.576 7.996 7.996c0 22.05 17.93 39.98 39.982 39.98a7.992 7.992 0 0 1 7.996 7.996 7.988 7.988 0 0 1-7.996 7.996z" fill=""></path><path d="M8.23 751.766a7.99 7.99 0 0 1-7.996-7.996V88.068c0-4.42 3.576-7.996 7.996-7.996s7.996 3.576 7.996 7.996v655.702a7.99 7.99 0 0 1-7.996 7.996zM72.202 751.766a7.99 7.99 0 0 1-7.996-7.996V56.084c0-4.42 3.576-7.996 7.996-7.996s7.996 3.576 7.996 7.996v687.686a7.99 7.99 0 0 1-7.996 7.996zM40.216 751.766a7.992 7.992 0 0 1-7.996-7.996V72.076a7.992 7.992 0 0 1 7.996-7.996 7.992 7.992 0 0 1 7.998 7.996v671.694a7.994 7.994 0 0 1-7.998 7.996z" fill=""></path><path d="M56.208 767.758c-4.42 0-7.996-3.576-7.996-7.996s3.576-7.996 7.996-7.996a8.012 8.012 0 0 0 7.996-7.996c0-4.42 3.576-7.996 7.996-7.996s7.996 3.576 7.996 7.996c0.002 13.226-10.758 23.988-23.988 23.988z" fill=""></path><path d="M56.208 767.758c-13.228 0-23.99-10.762-23.99-23.988a7.992 7.992 0 0 1 7.996-7.996 7.992 7.992 0 0 1 7.998 7.996 8.012 8.012 0 0 0 7.996 7.996c4.42 0 7.996 3.576 7.996 7.996s-3.576 7.996-7.996 7.996zM505.502 799.742H56.208a7.99 7.99 0 0 1-7.996-7.996 7.992 7.992 0 0 1 7.996-7.996h449.294a7.994 7.994 0 0 1 7.998 7.996 7.992 7.992 0 0 1-7.998 7.996zM1015.77 48.088H104.186a7.994 7.994 0 0 1-7.996-7.996 7.994 7.994 0 0 1 7.996-7.998h911.584a7.992 7.992 0 0 1 7.996 7.998 7.992 7.992 0 0 1-7.996 7.996zM951.798 208.014H200.142a7.99 7.99 0 0 1-7.996-7.996V104.062a7.992 7.992 0 0 1 7.996-7.998h751.656a7.992 7.992 0 0 1 7.996 7.998v95.956a7.99 7.99 0 0 1-7.996 7.996z m-743.66-15.992h735.664V112.058H208.138v79.964z" fill=""></path><path d="M903.82 160.036H248.12c-4.42 0-7.996-3.576-7.996-7.996s3.576-7.996 7.996-7.996h655.7c4.42 0 7.996 3.576 7.996 7.996s-3.576 7.996-7.996 7.996zM919.812 799.742h-143.934a7.99 7.99 0 0 1-7.996-7.996 7.992 7.992 0 0 1 7.996-7.996h143.934a7.99 7.99 0 0 1 7.996 7.996 7.988 7.988 0 0 1-7.996 7.996zM424.042 415.918h-223.9a7.99 7.99 0 0 1-7.996-7.996v-143.934a7.99 7.99 0 0 1 7.996-7.996H424.04a7.992 7.992 0 0 1 7.996 7.996v143.934a7.99 7.99 0 0 1-7.994 7.996z m-215.904-15.992h207.906v-127.942H208.138v127.942z" fill=""></path><path d="M296.1 399.926a8.008 8.008 0 0 1-6.404-12.792l47.978-63.97a8.014 8.014 0 0 1 11.198-1.6 8.006 8.006 0 0 1 1.61 11.19l-47.978 63.97a8 8 0 0 1-6.404 3.202z" fill=""></path><path d="M392.054 399.926a7.992 7.992 0 0 1-6.402-3.202l-47.978-63.97a8.004 8.004 0 0 1 1.608-11.19 7.996 7.996 0 0 1 11.198 1.6l47.978 63.97a8.008 8.008 0 0 1-6.404 12.792zM248.122 399.926a7.998 7.998 0 0 1-6.654-12.432l31.986-47.978a8.008 8.008 0 0 1 11.088-2.216 7.998 7.998 0 0 1 2.218 11.088l-31.986 47.978a7.992 7.992 0 0 1-6.652 3.56z" fill=""></path><path d="M290.758 367.942a7.994 7.994 0 0 1-6.654-3.56l-10.652-15.994a7.994 7.994 0 0 1 2.218-11.088c3.638-2.454 8.622-1.46 11.088 2.216l10.65 15.994a7.994 7.994 0 0 1-6.65 12.432zM248.122 335.956c-13.228 0-23.99-10.76-23.99-23.988s10.76-23.99 23.99-23.99 23.988 10.762 23.988 23.99-10.76 23.988-23.988 23.988z m0-31.986c-4.404 0-7.996 3.584-7.996 7.996s3.592 7.996 7.996 7.996 7.996-3.584 7.996-7.996-3.592-7.996-7.996-7.996z" fill=""></path><path d="M679.924 271.984H472.018c-4.42 0-7.998-3.576-7.998-7.996s3.578-7.996 7.998-7.996h207.906c4.42 0 7.996 3.576 7.996 7.996s-3.576 7.996-7.996 7.996z" fill=""></path><path d="M679.924 319.962H472.018c-4.42 0-7.998-3.576-7.998-7.996s3.578-7.996 7.998-7.996h207.906c4.42 0 7.996 3.576 7.996 7.996s-3.576 7.996-7.996 7.996z" fill=""></path><path d="M679.924 367.942H472.018c-4.42 0-7.998-3.576-7.998-7.996s3.578-7.998 7.998-7.998h207.906c4.42 0 7.996 3.578 7.996 7.998s-3.576 7.996-7.996 7.996z" fill=""></path><path d="M679.924 415.918H472.018c-4.42 0-7.998-3.576-7.998-7.996s3.578-7.996 7.998-7.996h207.906c4.42 0 7.996 3.576 7.996 7.996s-3.576 7.996-7.996 7.996z" fill=""></path><path d="M679.924 463.896H472.018c-4.42 0-7.998-3.576-7.998-7.996s3.578-7.996 7.998-7.996h207.906c4.42 0 7.996 3.576 7.996 7.996s-3.576 7.996-7.996 7.996z" fill=""></path><path d="M504.004 511.876h-31.986c-4.42 0-7.998-3.576-7.998-7.996s3.578-7.996 7.998-7.996h31.986c4.42 0 7.996 3.576 7.996 7.996s-3.576 7.996-7.996 7.996z" fill=""></path><path d="M424.79 463.896H200.892c-4.42 0-7.996-3.576-7.996-7.996s3.576-7.996 7.996-7.996h223.898c4.42 0 7.996 3.576 7.996 7.996s-3.576 7.996-7.996 7.996z" fill=""></path><path d="M392.804 655.808h-191.912c-4.42 0-7.996-3.576-7.996-7.996s3.576-7.996 7.996-7.996h191.912c4.42 0 7.996 3.576 7.996 7.996s-3.576 7.996-7.996 7.996z" fill=""></path><path d="M408.796 703.788H200.892c-4.42 0-7.996-3.576-7.996-7.996s3.576-7.996 7.996-7.996h207.904c4.42 0 7.996 3.576 7.996 7.996s-3.576 7.996-7.996 7.996z" fill=""></path><path d="M424.79 751.766H200.892c-4.42 0-7.996-3.576-7.996-7.996s3.576-7.996 7.996-7.996h223.898c4.42 0 7.996 3.576 7.996 7.996s-3.576 7.996-7.996 7.996z" fill=""></path><path d="M424.79 511.876H200.892c-4.42 0-7.996-3.576-7.996-7.996s3.576-7.996 7.996-7.996h223.898c4.42 0 7.996 3.576 7.996 7.996s-3.576 7.996-7.996 7.996z" fill=""></path><path d="M408.796 559.854H200.892c-4.42 0-7.996-3.576-7.996-7.996s3.576-7.998 7.996-7.998h207.904c4.42 0 7.996 3.578 7.996 7.998s-3.576 7.996-7.996 7.996z" fill=""></path><path d="M392.804 607.832h-191.912a7.992 7.992 0 0 1-7.996-7.996 7.992 7.992 0 0 1 7.996-7.998h191.912a7.992 7.992 0 0 1 7.996 7.998 7.992 7.992 0 0 1-7.996 7.996z" fill=""></path><path d="M951.798 271.984H727.902c-4.422 0-7.998-3.576-7.998-7.996s3.576-7.996 7.998-7.996h223.896c4.42 0 7.996 3.576 7.996 7.996s-3.576 7.996-7.996 7.996z" fill=""></path><path d="M951.798 319.962H727.902c-4.422 0-7.998-3.576-7.998-7.996s3.576-7.996 7.998-7.996h223.896c4.42 0 7.996 3.576 7.996 7.996s-3.576 7.996-7.996 7.996z" fill=""></path><path d="M871.836 367.942h-143.934c-4.422 0-7.998-3.576-7.998-7.996s3.576-7.998 7.998-7.998h143.934c4.42 0 7.996 3.578 7.996 7.998s-3.576 7.996-7.996 7.996z" fill=""></path><path d="M823.858 415.918h-95.956c-4.422 0-7.998-3.576-7.998-7.996s3.576-7.996 7.998-7.996h95.956c4.42 0 7.996 3.576 7.996 7.996s-3.576 7.996-7.996 7.996z" fill=""></path><path d="M743.894 463.896h-15.992c-4.422 0-7.998-3.576-7.998-7.996s3.576-7.996 7.998-7.996h15.992c4.42 0 7.996 3.576 7.996 7.996s-3.576 7.996-7.996 7.996z" fill=""></path></g></svg>
+                        Berita Terkini
+                    </button>
+                    <span class="flex-grow bg-primary rounded h-1"></span>
+                </h3>
+                <div class="flex">
+                    <div class="w-1/2 mr-1">
+                        <div class="rounded-lg overflow-hidden">
+                            <img src="dist/ini.jpeg" alt="">
+                        </div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus dolorem aperiam odio incidunt!</p>
+                    </div>
+                    <div class="w-1/2 ml-1">
+                        <div class="flex flex-col">
+                            <div class="flex mb-2">
+                                <div class="w-2/5 rounded-lg overflow-hidden">
+                                    <img src="dist/ini.jpeg" alt="">
+                                </div>
+                                <div class="w-3/5 pl-2">
+                                    <a href="" class="hover:text-primary font-semibold"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam expedita distinctio reprehenderit perferendis, ratione nostrum.</p></a>
+                                    <p class="font-thin text-xs pt-2 text-slate-500">25 Januari 2024</p>
+                                </div>
+                            </div>
+                            <div class="flex mb-2">
+                                <div class="w-2/5 rounded-lg overflow-hidden">
+                                    <img src="dist/ini.jpeg" alt="">
+                                </div>
+                                <div class="w-3/5 pl-2">
+                                    <a href="" class="hover:text-primary font-semibold"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam expedita distinctio reprehenderit perferendis, ratione nostrum.</p></a>
+                                    <p class="font-thin text-xs pt-2 text-slate-500">25 Januari 2024</p>
+                                </div>
+                            </div>
+                            <div class="flex mb-2">
+                                <div class="w-2/5 rounded-lg overflow-hidden">
+                                    <img src="dist/ini.jpeg" alt="">
+                                </div>
+                                <div class="w-3/5 pl-2">
+                                    <a href="" class="hover:text-primary font-semibold"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam expedita distinctio reprehenderit perferendis, ratione nostrum.</p></a>
+                                    <p class="font-thin text-xs pt-2 text-slate-500">25 Januari 2024</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- berta terbaru end -->
+
+                <!-- pengumuman start -->
+                <div class="relative pt-2 lg:pt-2 min-h-screen">
+                    <h2 class="flex flex-row flex-nowrap items-center mt-24 w-full">
+                        <span class="flex-grow block border-t border-black"></span>
+                        <span class="flex mx-4 px-4 py-2.5 text-xl rounded leading-none font-medium bg-primary text-white">
+                        <span class="border rounded-lg text-white mr-3">
+                        <svg class="w-6 h-6 fill-current" fill="#000000" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title></title> <g id="promo"> <path d="M73,37V26.91a2.51,2.51,0,0,0-3.72-2.18l-21.42,12A2.48,2.48,0,0,0,45.5,35h-11a2.5,2.5,0,0,0-2.45,2H26.5A4.51,4.51,0,0,0,22,41.5v9A4.51,4.51,0,0,0,26.5,55H32V69.5A2.5,2.5,0,0,0,34.5,72h6.59a1.5,1.5,0,0,0,1.06-2.56l-1.71-1.71A1.5,1.5,0,0,1,40,66.67V57h5.5a2.48,2.48,0,0,0,2.36-1.72l21.42,12a2.53,2.53,0,0,0,1.22.32,2.38,2.38,0,0,0,1.26-.35A2.46,2.46,0,0,0,73,65.09V55a5.5,5.5,0,0,0,5-5.47v-7A5.5,5.5,0,0,0,73,37ZM26.5,54A3.5,3.5,0,0,1,23,50.5v-9A3.5,3.5,0,0,1,26.5,38H32V54ZM39.73,68.44l1.71,1.71a.48.48,0,0,1,.11.54.49.49,0,0,1-.46.31H34.5A1.5,1.5,0,0,1,33,69.5V57h6v9.67A2.49,2.49,0,0,0,39.73,68.44ZM45.5,56H33V37.5A1.5,1.5,0,0,1,34.5,36h11A1.5,1.5,0,0,1,47,37.5v17A1.5,1.5,0,0,1,45.5,56ZM48,37.79,69,26V66L48,54.21Zm24,27.3a1.49,1.49,0,0,1-2,1.4v-41a1.49,1.49,0,0,1,2,1.4V65.09ZM77,49.5A4.5,4.5,0,0,1,73,54V38a4.5,4.5,0,0,1,4,4.47Z"></path> <path d="M29.5,41h-4a.5.5,0,0,0,0,1h4a.5.5,0,0,0,0-1Z"></path> <path d="M29.5,44h-4a.5.5,0,0,0,0,1h4a.5.5,0,0,0,0-1Z"></path> <path d="M29.5,47h-4a.5.5,0,0,0,0,1h4a.5.5,0,0,0,0-1Z"></path> <path d="M29.5,50h-4a.5.5,0,0,0,0,1h4a.5.5,0,0,0,0-1Z"></path> </g> </g></svg>    
+                        </span>
+                        <h3 class="font-normal">Pengumunan</h3>
+                        </span>
+                        <span class="flex-grow block border-t border-black"></span>
+                    </h2>
+                    <div class="bg-cover w-full flex justify-center items-center"
+                        style="background-image: url('/images/mybackground.jpeg');">
+                        <div class="w-full bg-white py-5  bg-opacity-40 backdrop-filter backdrop-blur-lg">
+                            <div class="w-12/12 mx-auto rounded-2xl bg-white py-5 bg-opacity-40 backdrop-filter backdrop-blur-lg">
+                
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-center px-2 mx-auto">
+                  
+                                    <article
+                                        class="bg-white  p-6 mb-6 shadow transition duration-300 group transform hover:-translate-y-2 hover:shadow-2xl rounded-2xl cursor-pointer border">
+                                        <a target="_self" href="/blog/slug"
+                                            class="absolute opacity-0 top-0 right-0 left-0 bottom-0"></a>
+                                        <div class="relative mb-4 rounded-2xl">
+                                            <img class="max-h-80 rounded-2xl w-full object-cover transition-transform duration-300 transform group-hover:scale-105"
+                                                src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
+                                            <div
+                                                class="absolute bottom-3 left-3 inline-flex items-center rounded-lg bg-white p-2 shadow-md">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-red-700">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                                </svg>
+                                                <span class="ml-1 text-sm text-slate-400">2</span>
+                
+                                            </div>
+                
+                                            <a class="flex justify-center items-center bg-primary bg-opacity-80 z-10 absolute top-0 left-0 w-full h-full text-white rounded-2xl opacity-0 transition-all duration-300 transform group-hover:scale-105 text-base group-hover:opacity-100"
+                                                href="/blog/slug" target="_self" rel="noopener noreferrer">
+                                                Baca Selengkapnya
+                                                <svg class="ml-2 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div class="flex justify-between items-center w-full pb-4 mb-auto">
+                                            <div class="flex items-center">
+                                                <div class="pr-3">
+                                                    <img class="h-12 w-12 rounded-full object-cover" src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                                        alt="">
+                                                </div>
+                                                <div class="flex flex-1">
+                                                    <div class="">
+                                                        <p class="text-xs font-semibold ">Morris Muthigani</p>
+                                                        <p class="text-xs text-gray-500">19/03/2024</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <h3 class="font-medium text-sm leading-8">
+                                            <a href="/blog/slug"
+                                                class="block relative group-hover:text-primary transition-colors duration-200 ">
+                                                Instant Help at Your Fingertips
+                                            </a>
+                                        </h3>
+                                        <div>
+                                        </div>
+                                    </article>
+                                    <article
+                                        class="bg-white  p-6 mb-6 shadow transition duration-300 group transform hover:-translate-y-2 hover:shadow-2xl rounded-2xl cursor-pointer border">
+                                        <a target="_self" href="/blog/slug"
+                                            class="absolute opacity-0 top-0 right-0 left-0 bottom-0"></a>
+                                        <div class="relative mb-4 rounded-2xl">
+                                            <img class="max-h-80 rounded-2xl w-full object-cover transition-transform duration-300 transform group-hover:scale-105"
+                                                src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
+                                            <div
+                                                class="absolute bottom-3 left-3 inline-flex items-center rounded-lg bg-white p-2 shadow-md">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-red-700">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                                </svg>
+                                                <span class="ml-1 text-sm text-slate-400">2</span>
+                
+                                            </div>
+                
+                                            <a class="flex justify-center items-center bg-primary bg-opacity-80 z-10 absolute top-0 left-0 w-full h-full text-white rounded-2xl opacity-0 transition-all duration-300 transform group-hover:scale-105 text-base group-hover:opacity-100"
+                                                href="/blog/slug" target="_self" rel="noopener noreferrer">
+                                                Baca Selengkapnya
+                                                <svg class="ml-2 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div class="flex justify-between items-center w-full pb-4 mb-auto">
+                                            <div class="flex items-center">
+                                                <div class="pr-3">
+                                                    <img class="h-12 w-12 rounded-full object-cover" src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                                        alt="">
+                                                </div>
+                                                <div class="flex flex-1">
+                                                    <div class="">
+                                                        <p class="text-xs font-semibold ">Morris Muthigani</p>
+                                                        <p class="text-xs text-gray-500">19/03/2024</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <h3 class="font-medium text-sm leading-8">
+                                            <a href="/blog/slug"
+                                                class="block relative group-hover:text-primary transition-colors duration-200 ">
+                                                Instant Help at Your Fingertips
+                                            </a>
+                                        </h3>
+                                        <div>
+                                        </div>
+                                    </article>
+                                    <article
+                                        class="bg-white  p-6 mb-6 shadow transition duration-300 group transform hover:-translate-y-2 hover:shadow-2xl rounded-2xl cursor-pointer border">
+                                        <a target="_self" href="/blog/slug"
+                                            class="absolute opacity-0 top-0 right-0 left-0 bottom-0"></a>
+                                        <div class="relative mb-4 rounded-2xl">
+                                            <img class="max-h-80 rounded-2xl w-full object-cover transition-transform duration-300 transform group-hover:scale-105"
+                                                src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
+                                            <div
+                                                class="absolute bottom-3 left-3 inline-flex items-center rounded-lg bg-white p-2 shadow-md">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-red-700">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                                </svg>
+                                                <span class="ml-1 text-sm text-slate-400">2</span>
+                
+                                            </div>
+                
+                                            <a class="flex justify-center items-center bg-primary bg-opacity-80 z-10 absolute top-0 left-0 w-full h-full text-white rounded-2xl opacity-0 transition-all duration-300 transform group-hover:scale-105 text-base group-hover:opacity-100"
+                                                href="/blog/slug" target="_self" rel="noopener noreferrer">
+                                                Baca Selengkapnya
+                                                <svg class="ml-2 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div class="flex justify-between items-center w-full pb-4 mb-auto">
+                                            <div class="flex items-center">
+                                                <div class="pr-3">
+                                                    <img class="h-12 w-12 rounded-full object-cover" src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                                        alt="">
+                                                </div>
+                                                <div class="flex flex-1">
+                                                    <div class="">
+                                                        <p class="text-xs font-semibold ">Morris Muthigani</p>
+                                                        <p class="text-xs text-gray-500">19/03/2024</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <h3 class="font-medium text-sm leading-8">
+                                            <a href="/blog/slug"
+                                                class="block relative group-hover:text-primary transition-colors duration-200 ">
+                                                Instant Help at Your Fingertips
+                                            </a>
+                                        </h3>
+                                        <div>
+                                        </div>
+                                    </article>
+                                    <article
+                                        class="bg-white  p-6 mb-6 shadow transition duration-300 group transform hover:-translate-y-2 hover:shadow-2xl rounded-2xl cursor-pointer border">
+                                        <a target="_self" href="/blog/slug"
+                                            class="absolute opacity-0 top-0 right-0 left-0 bottom-0"></a>
+                                        <div class="relative mb-4 rounded-2xl">
+                                            <img class="max-h-80 rounded-2xl w-full object-cover transition-transform duration-300 transform group-hover:scale-105"
+                                                src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
+                                            <div
+                                                class="absolute bottom-3 left-3 inline-flex items-center rounded-lg bg-white p-2 shadow-md">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-red-700">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                                </svg>
+                                                <span class="ml-1 text-sm text-slate-400">2</span>
+                
+                                            </div>
+                
+                                            <a class="flex justify-center items-center bg-primary bg-opacity-80 z-10 absolute top-0 left-0 w-full h-full text-white rounded-2xl opacity-0 transition-all duration-300 transform group-hover:scale-105 text-base group-hover:opacity-100"
+                                                href="/blog/slug" target="_self" rel="noopener noreferrer">
+                                                Baca Selengkapnya
+                                                <svg class="ml-2 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div class="flex justify-between items-center w-full pb-4 mb-auto">
+                                            <div class="flex items-center">
+                                                <div class="pr-3">
+                                                    <img class="h-12 w-12 rounded-full object-cover" src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                                        alt="">
+                                                </div>
+                                                <div class="flex flex-1">
+                                                    <div class="">
+                                                        <p class="text-xs font-semibold ">Morris Muthigani</p>
+                                                        <p class="text-xs text-gray-500">19/03/2024</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <h3 class="font-medium text-sm leading-8">
+                                            <a href="/blog/slug"
+                                                class="block relative group-hover:text-primary transition-colors duration-200 ">
+                                                Instant Help at Your Fingertips
+                                            </a>
+                                        </h3>
+                                        <div>
+                                        </div>
+                                    </article>
+                                    <article
+                                        class="bg-white  p-6 mb-6 shadow transition duration-300 group transform hover:-translate-y-2 hover:shadow-2xl rounded-2xl cursor-pointer border">
+                                        <a target="_self" href="/blog/slug"
+                                            class="absolute opacity-0 top-0 right-0 left-0 bottom-0"></a>
+                                        <div class="relative mb-4 rounded-2xl">
+                                            <img class="max-h-80 rounded-2xl w-full object-cover transition-transform duration-300 transform group-hover:scale-105"
+                                                src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
+                                            <div
+                                                class="absolute bottom-3 left-3 inline-flex items-center rounded-lg bg-white p-2 shadow-md">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-red-700">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                                </svg>
+                                                <span class="ml-1 text-sm text-slate-400">2</span>
+                
+                                            </div>
+                
+                                            <a class="flex justify-center items-center bg-primary bg-opacity-80 z-10 absolute top-0 left-0 w-full h-full text-white rounded-2xl opacity-0 transition-all duration-300 transform group-hover:scale-105 text-base group-hover:opacity-100"
+                                                href="/blog/slug" target="_self" rel="noopener noreferrer">
+                                                Baca Selengkapnya
+                                                <svg class="ml-2 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div class="flex justify-between items-center w-full pb-4 mb-auto">
+                                            <div class="flex items-center">
+                                                <div class="pr-3">
+                                                    <img class="h-12 w-12 rounded-full object-cover" src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                                        alt="">
+                                                </div>
+                                                <div class="flex flex-1">
+                                                    <div class="">
+                                                        <p class="text-xs font-semibold ">Morris Muthigani</p>
+                                                        <p class="text-xs text-gray-500">19/03/2024</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <h3 class="font-medium text-sm leading-8">
+                                            <a href="/blog/slug"
+                                                class="block relative group-hover:text-primary transition-colors duration-200 ">
+                                                Instant Help at Your Fingertips
+                                            </a>
+                                        </h3>
+                                        <div>
+                                        </div>
+                                    </article>
+                                    <article
+                                        class="bg-white  p-6 mb-6 shadow transition duration-300 group transform hover:-translate-y-2 hover:shadow-2xl rounded-2xl cursor-pointer border">
+                                        <a target="_self" href="/blog/slug"
+                                            class="absolute opacity-0 top-0 right-0 left-0 bottom-0"></a>
+                                        <div class="relative mb-4 rounded-2xl">
+                                            <img class="max-h-80 rounded-2xl w-full object-cover transition-transform duration-300 transform group-hover:scale-105"
+                                                src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
+                                            <div
+                                                class="absolute bottom-3 left-3 inline-flex items-center rounded-lg bg-white p-2 shadow-md">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-red-700">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                                </svg>
+                                                <span class="ml-1 text-sm text-slate-400">2</span>
+                
+                                            </div>
+                
+                                            <a class="flex justify-center items-center bg-primary bg-opacity-80 z-10 absolute top-0 left-0 w-full h-full text-white rounded-2xl opacity-0 transition-all duration-300 transform group-hover:scale-105 text-base group-hover:opacity-100"
+                                                href="/blog/slug" target="_self" rel="noopener noreferrer">
+                                                Baca Selengkapnya
+                                                <svg class="ml-2 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div class="flex justify-between items-center w-full pb-4 mb-auto">
+                                            <div class="flex items-center">
+                                                <div class="pr-3">
+                                                    <img class="h-12 w-12 rounded-full object-cover" src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                                        alt="">
+                                                </div>
+                                                <div class="flex flex-1">
+                                                    <div class="">
+                                                        <p class="text-xs font-semibold ">Morris Muthigani</p>
+                                                        <p class="text-xs text-gray-500">19/03/2024</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <h3 class="font-medium text-sm leading-8">
+                                            <a href="/blog/slug"
+                                                class="block relative group-hover:text-primary transition-colors duration-200 ">
+                                                Instant Help at Your Fingertips
+                                            </a>
+                                        </h3>
+                                        <div>
+                                        </div>
+                                    </article>
+                                    <article
+                                        class="bg-white  p-6 mb-6 shadow transition duration-300 group transform hover:-translate-y-2 hover:shadow-2xl rounded-2xl cursor-pointer border">
+                                        <a target="_self" href="/blog/slug"
+                                            class="absolute opacity-0 top-0 right-0 left-0 bottom-0"></a>
+                                        <div class="relative mb-4 rounded-2xl">
+                                            <img class="max-h-80 rounded-2xl w-full object-cover transition-transform duration-300 transform group-hover:scale-105"
+                                                src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
+                                            <div
+                                                class="absolute bottom-3 left-3 inline-flex items-center rounded-lg bg-white p-2 shadow-md">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-red-700">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                                </svg>
+                                                <span class="ml-1 text-sm text-slate-400">2</span>
+                
+                                            </div>
+                
+                                            <a class="flex justify-center items-center bg-primary bg-opacity-80 z-10 absolute top-0 left-0 w-full h-full text-white rounded-2xl opacity-0 transition-all duration-300 transform group-hover:scale-105 text-base group-hover:opacity-100"
+                                                href="/blog/slug" target="_self" rel="noopener noreferrer">
+                                                Baca Selengkapnya
+                                                <svg class="ml-2 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div class="flex justify-between items-center w-full pb-4 mb-auto">
+                                            <div class="flex items-center">
+                                                <div class="pr-3">
+                                                    <img class="h-12 w-12 rounded-full object-cover" src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                                        alt="">
+                                                </div>
+                                                <div class="flex flex-1">
+                                                    <div class="">
+                                                        <p class="text-xs font-semibold ">Morris Muthigani</p>
+                                                        <p class="text-xs text-gray-500">19/03/2024</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <h3 class="font-medium text-sm leading-8">
+                                            <a href="/blog/slug"
+                                                class="block relative group-hover:text-primary transition-colors duration-200 ">
+                                                Instant Help at Your Fingertips
+                                            </a>
+                                        </h3>
+                                        <div>
+                                        </div>
+                                    </article>
+                                    <article
+                                        class="bg-white  p-6 mb-6 shadow transition duration-300 group transform hover:-translate-y-2 hover:shadow-2xl rounded-2xl cursor-pointer border">
+                                        <a target="_self" href="/blog/slug"
+                                            class="absolute opacity-0 top-0 right-0 left-0 bottom-0"></a>
+                                        <div class="relative mb-4 rounded-2xl">
+                                            <img class="max-h-80 rounded-2xl w-full object-cover transition-transform duration-300 transform group-hover:scale-105"
+                                                src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
+                                            <div
+                                                class="absolute bottom-3 left-3 inline-flex items-center rounded-lg bg-white p-2 shadow-md">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-red-700">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                                </svg>
+                                                <span class="ml-1 text-sm text-slate-400">2</span>
+                
+                                            </div>
+                
+                                            <a class="flex justify-center items-center bg-primary bg-opacity-80 z-10 absolute top-0 left-0 w-full h-full text-white rounded-2xl opacity-0 transition-all duration-300 transform group-hover:scale-105 text-base group-hover:opacity-100"
+                                                href="/blog/slug" target="_self" rel="noopener noreferrer">
+                                                Baca Selengkapnya
+                                                <svg class="ml-2 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div class="flex justify-between items-center w-full pb-4 mb-auto">
+                                            <div class="flex items-center">
+                                                <div class="pr-3">
+                                                    <img class="h-12 w-12 rounded-full object-cover" src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                                        alt="">
+                                                </div>
+                                                <div class="flex flex-1">
+                                                    <div class="">
+                                                        <p class="text-xs font-semibold ">Morris Muthigani</p>
+                                                        <p class="text-xs text-gray-500">19/03/2024</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <h3 class="font-medium text-sm leading-8">
+                                            <a href="/blog/slug"
+                                                class="block relative group-hover:text-primary transition-colors duration-200 ">
+                                                Instant Help at Your Fingertips
+                                            </a>
+                                        </h3>
+                                        <div>
+                                        </div>
+                                    </article>
+                                    <article
+                                        class="bg-white  p-6 mb-6 shadow transition duration-300 group transform hover:-translate-y-2 hover:shadow-2xl rounded-2xl cursor-pointer border">
+                                        <a target="_self" href="/blog/slug"
+                                            class="absolute opacity-0 top-0 right-0 left-0 bottom-0"></a>
+                                        <div class="relative mb-4 rounded-2xl">
+                                            <img class="max-h-80 rounded-2xl w-full object-cover transition-transform duration-300 transform group-hover:scale-105"
+                                                src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
+                                            <div
+                                                class="absolute bottom-3 left-3 inline-flex items-center rounded-lg bg-white p-2 shadow-md">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-red-700">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                                </svg>
+                                                <span class="ml-1 text-sm text-slate-400">2</span>
+                
+                                            </div>
+                
+                                            <a class="flex justify-center items-center bg-primary bg-opacity-80 z-10 absolute top-0 left-0 w-full h-full text-white rounded-2xl opacity-0 transition-all duration-300 transform group-hover:scale-105 text-base group-hover:opacity-100"
+                                                href="/blog/slug" target="_self" rel="noopener noreferrer">
+                                                Baca Selengkapnya
+                                                <svg class="ml-2 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div class="flex justify-between items-center w-full pb-4 mb-auto">
+                                            <div class="flex items-center">
+                                                <div class="pr-3">
+                                                    <img class="h-12 w-12 rounded-full object-cover" src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                                        alt="">
+                                                </div>
+                                                <div class="flex flex-1">
+                                                    <div class="">
+                                                        <p class="text-xs font-semibold ">Morris Muthigani</p>
+                                                        <p class="text-xs text-gray-500">19/03/2024</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <h3 class="font-medium text-sm leading-8">
+                                            <a href="/blog/slug"
+                                                class="block relative group-hover:text-primary transition-colors duration-200 ">
+                                                Instant Help at Your Fingertips
+                                            </a>
+                                        </h3>
+                                        <div>
+                                        </div>
+                                    </article>
+                
+                
+
+                                 
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- pengumuman end -->
+                <!-- instagram start -->
+                <section class="py-8 max-w-7xl">
+                        <h2 class="flex flex-row flex-nowrap items-center mt-8 w-full">
+                            <span class="flex-grow block border-t border-black"></span>
+                            <button
+                            class="flex items-center bg-white border border-gray-300 rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                            
+                            <svg class="h-6 w-6 mr-2" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect x="2" y="2" width="28" height="28" rx="6" fill="url(#paint0_radial_87_7153)"></rect> <rect x="2" y="2" width="28" height="28" rx="6" fill="url(#paint1_radial_87_7153)"></rect> <rect x="2" y="2" width="28" height="28" rx="6" fill="url(#paint2_radial_87_7153)"></rect> <path d="M23 10.5C23 11.3284 22.3284 12 21.5 12C20.6716 12 20 11.3284 20 10.5C20 9.67157 20.6716 9 21.5 9C22.3284 9 23 9.67157 23 10.5Z" fill="white"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M16 21C18.7614 21 21 18.7614 21 16C21 13.2386 18.7614 11 16 11C13.2386 11 11 13.2386 11 16C11 18.7614 13.2386 21 16 21ZM16 19C17.6569 19 19 17.6569 19 16C19 14.3431 17.6569 13 16 13C14.3431 13 13 14.3431 13 16C13 17.6569 14.3431 19 16 19Z" fill="white"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M6 15.6C6 12.2397 6 10.5595 6.65396 9.27606C7.2292 8.14708 8.14708 7.2292 9.27606 6.65396C10.5595 6 12.2397 6 15.6 6H16.4C19.7603 6 21.4405 6 22.7239 6.65396C23.8529 7.2292 24.7708 8.14708 25.346 9.27606C26 10.5595 26 12.2397 26 15.6V16.4C26 19.7603 26 21.4405 25.346 22.7239C24.7708 23.8529 23.8529 24.7708 22.7239 25.346C21.4405 26 19.7603 26 16.4 26H15.6C12.2397 26 10.5595 26 9.27606 25.346C8.14708 24.7708 7.2292 23.8529 6.65396 22.7239C6 21.4405 6 19.7603 6 16.4V15.6ZM15.6 8H16.4C18.1132 8 19.2777 8.00156 20.1779 8.0751C21.0548 8.14674 21.5032 8.27659 21.816 8.43597C22.5686 8.81947 23.1805 9.43139 23.564 10.184C23.7234 10.4968 23.8533 10.9452 23.9249 11.8221C23.9984 12.7223 24 13.8868 24 15.6V16.4C24 18.1132 23.9984 19.2777 23.9249 20.1779C23.8533 21.0548 23.7234 21.5032 23.564 21.816C23.1805 22.5686 22.5686 23.1805 21.816 23.564C21.5032 23.7234 21.0548 23.8533 20.1779 23.9249C19.2777 23.9984 18.1132 24 16.4 24H15.6C13.8868 24 12.7223 23.9984 11.8221 23.9249C10.9452 23.8533 10.4968 23.7234 10.184 23.564C9.43139 23.1805 8.81947 22.5686 8.43597 21.816C8.27659 21.5032 8.14674 21.0548 8.0751 20.1779C8.00156 19.2777 8 18.1132 8 16.4V15.6C8 13.8868 8.00156 12.7223 8.0751 11.8221C8.14674 10.9452 8.27659 10.4968 8.43597 10.184C8.81947 9.43139 9.43139 8.81947 10.184 8.43597C10.4968 8.27659 10.9452 8.14674 11.8221 8.0751C12.7223 8.00156 13.8868 8 15.6 8Z" fill="white"></path> <defs> <radialGradient id="paint0_radial_87_7153" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(12 23) rotate(-55.3758) scale(25.5196)"> <stop stop-color="#B13589"></stop> <stop offset="0.79309" stop-color="#C62F94"></stop> <stop offset="1" stop-color="#8A3AC8"></stop> </radialGradient> <radialGradient id="paint1_radial_87_7153" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(11 31) rotate(-65.1363) scale(22.5942)"> <stop stop-color="#E0E8B7"></stop> <stop offset="0.444662" stop-color="#FB8A2E"></stop> <stop offset="0.71474" stop-color="#E2425C"></stop> <stop offset="1" stop-color="#E2425C" stop-opacity="0"></stop> </radialGradient> <radialGradient id="paint2_radial_87_7153" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(0.500002 3) rotate(-8.1301) scale(38.8909 8.31836)"> <stop offset="0.156701" stop-color="#406ADC"></stop> <stop offset="0.467799" stop-color="#6A45BE"></stop> <stop offset="1" stop-color="#6A45BE" stop-opacity="0"></stop> </radialGradient> </defs> </g></svg>
+                            <span>Dinas Kesehatan Kab Probolinggo</span>
+                        </button>
+                            <span class="flex-grow block border-t border-black"></span>
+                        </h2>
+                  
+                  </section>
+                  
+                  <section>
+                  
+                    <div x-data="{
+                          imageGalleryOpened: false,
+                          imageGalleryActiveUrl: null,
+                          imageGalleryImageIndex: null,
+                          imageGalleryOpen(event) {
+                              this.imageGalleryImageIndex = event.target.dataset.index;
+                              this.imageGalleryActiveUrl = event.target.src;
+                              this.imageGalleryOpened = true;
+                          },
+                          imageGalleryClose() {
+                              this.imageGalleryOpened = false;
+                              setTimeout(() => this.imageGalleryActiveUrl = null, 300);
+                          },
+                          imageGalleryNext(){
+                              if(this.imageGalleryImageIndex == this.$refs.gallery.childElementCount){
+                                  this.imageGalleryImageIndex = 1;
+                              } else {
+                                  this.imageGalleryImageIndex = parseInt(this.imageGalleryImageIndex) + 1;
+                              }
+                              this.imageGalleryActiveUrl = this.$refs.gallery.querySelector('[data-index=\'' + this.imageGalleryImageIndex + '\']').src;
+                          },
+                          imageGalleryPrev() {
+                              if(this.imageGalleryImageIndex == 1){
+                                  this.imageGalleryImageIndex = this.$refs.gallery.childElementCount;
+                              } else {
+                                  this.imageGalleryImageIndex = parseInt(this.imageGalleryImageIndex) - 1;
+                              }
+                  
+                              this.imageGalleryActiveUrl = this.$refs.gallery.querySelector('[data-index=\'' + this.imageGalleryImageIndex + '\']').src;
+                              
+                          }
+                      }" @image-gallery-next.window="imageGalleryNext()" @image-gallery-prev.window="imageGalleryPrev()" @keyup.right.window="imageGalleryNext();" @keyup.left.window="imageGalleryPrev();" x-init="
+                          imageGalleryPhotos = $refs.gallery.querySelectorAll('img');
+                          for(let i=0; i<imageGalleryPhotos.length; i++){
+                              imageGalleryPhotos[i].setAttribute('data-index', i+1);
+                          }
+                      " class="w-full h-full select-none">
+                      <div class="max-w-6xl mx-auto duration-1000 delay-300 opacity-0 select-none ease animate-fade-in-view" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+                        <ul x-ref="gallery" id="gallery" class="grid grid-cols-2 gap-5 lg:grid-cols-5">
+                          <li><img x-on:click="imageGalleryOpen" src="https://images.pexels.com/photos/2356059/pexels-photo-2356059.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 01"></li>
+                  
+                          <li><img x-on:click="imageGalleryOpen" src="https://images.pexels.com/photos/3618162/pexels-photo-3618162.jpeg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 07"></li>
+                          <li><img x-on:click="imageGalleryOpen" src="https://images.unsplash.com/photo-1689217634234-38efb49cb664?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 08"></li>
+                          <li><img x-on:click="imageGalleryOpen" src="https://images.unsplash.com/photo-1520350094754-f0fdcac35c1c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 09"></li>
+                          <li><img x-on:click="imageGalleryOpen" src="https://cdn.devdojo.com/images/june2023/mountains-10.jpeg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 10"></li>
+                          <li><img x-on:click="imageGalleryOpen" src="https://cdn.devdojo.com/images/june2023/mountains-06.jpeg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 06"></li>
+                          <li><img x-on:click="imageGalleryOpen" src="https://images.pexels.com/photos/1891234/pexels-photo-1891234.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 07"></li>
+                          
+                          <li><img x-on:click="imageGalleryOpen" src="https://images.unsplash.com/photo-1529655683826-aba9b3e77383?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1965&q=80" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 08"></li>
+                          <li><img x-on:click="imageGalleryOpen" src="https://images.pexels.com/photos/4256852/pexels-photo-4256852.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 09"></li>
+                          <li><img x-on:click="imageGalleryOpen" src="https://images.unsplash.com/photo-1541795083-1b160cf4f3d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 10"></li>
+                        </ul>
+                      </div>
+                      <template x-teleport="body">
+                        <div x-show="imageGalleryOpened" x-transition:enter="transition ease-in-out duration-300" x-transition:enter-start="opacity-0" x-transition:leave="transition ease-in-in duration-300" x-transition:leave-end="opacity-0" @click="imageGalleryClose" @keydown.window.escape="imageGalleryClose" x-trap.inert.noscroll="imageGalleryOpened" class="fixed inset-0 z-[99] flex items-center justify-center bg-black bg-opacity-50 select-none cursor-zoom-out" x-cloak>
+                          <div class="relative flex items-center justify-center w-11/12 xl:w-4/5 h-11/12">
+                            <div @click="$event.stopPropagation(); $dispatch('image-gallery-prev')" class="absolute left-0 flex items-center justify-center text-white translate-x-10 rounded-full cursor-pointer xl:-translate-x-24 2xl:-translate-x-32 bg-white/10 w-14 h-14 hover:bg-white/20">
+                              <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                              </svg>
+                            </div>
+                            <img x-show="imageGalleryOpened" x-transition:enter="transition ease-in-out duration-300" x-transition:enter-start="opacity-0 transform scale-50" x-transition:leave="transition ease-in-in duration-300" x-transition:leave-end="opacity-0 transform scale-50" class="object-contain object-center w-full h-full select-none cursor-zoom-out" :src="imageGalleryActiveUrl" alt="" style="display: none;">
+                            <div @click="$event.stopPropagation(); $dispatch('image-gallery-next');" class="absolute right-0 flex items-center justify-center text-white -translate-x-10 rounded-full cursor-pointer xl:translate-x-24 2xl:translate-x-32 bg-white/10 w-14 h-14 hover:bg-white/20">
+                              <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </template>
+                    </div>
+                  
+                  </section>
+                <!-- instagram end -->
+
+                                <!-- youtube start -->
+                                <section class="py-8 max-w-7xl">
+                                    <h2 class="flex flex-row flex-nowrap items-center mt-8 w-full">
+                                        <span class="flex-grow block border-t border-black"></span>
+                                        <button
+                                        class="flex items-center bg-white border border-gray-300 rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                                        <svg class="h-6 w-6 mr-2" viewBox="0 -7 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>Youtube-color</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Color-" transform="translate(-200.000000, -368.000000)" fill="#CE1312"> <path d="M219.044,391.269916 L219.0425,377.687742 L232.0115,384.502244 L219.044,391.269916 Z M247.52,375.334163 C247.52,375.334163 247.0505,372.003199 245.612,370.536366 C243.7865,368.610299 241.7405,368.601235 240.803,368.489448 C234.086,368 224.0105,368 224.0105,368 L223.9895,368 C223.9895,368 213.914,368 207.197,368.489448 C206.258,368.601235 204.2135,368.610299 202.3865,370.536366 C200.948,372.003199 200.48,375.334163 200.48,375.334163 C200.48,375.334163 200,379.246723 200,383.157773 L200,386.82561 C200,390.73817 200.48,394.64922 200.48,394.64922 C200.48,394.64922 200.948,397.980184 202.3865,399.447016 C204.2135,401.373084 206.612,401.312658 207.68,401.513574 C211.52,401.885191 224,402 224,402 C224,402 234.086,401.984894 240.803,401.495446 C241.7405,401.382148 243.7865,401.373084 245.612,399.447016 C247.0505,397.980184 247.52,394.64922 247.52,394.64922 C247.52,394.64922 248,390.73817 248,386.82561 L248,383.157773 C248,379.246723 247.52,375.334163 247.52,375.334163 L247.52,375.334163 Z" id="Youtube"> </path> </g> </g> </g></svg>
+                                        <span>Dinas Kesehatan Kab Probolinggo</span>
+                                    </button>
+                                        <span class="flex-grow block border-t border-black"></span>
+                                    </h2>
+                              
+                              </section>
+                              
+                              <section>
+                              
+                                <div x-data="{
+                                      imageGalleryOpened: false,
+                                      imageGalleryActiveUrl: null,
+                                      imageGalleryImageIndex: null,
+                                      imageGalleryOpen(event) {
+                                          this.imageGalleryImageIndex = event.target.dataset.index;
+                                          this.imageGalleryActiveUrl = event.target.src;
+                                          this.imageGalleryOpened = true;
+                                      },
+                                      imageGalleryClose() {
+                                          this.imageGalleryOpened = false;
+                                          setTimeout(() => this.imageGalleryActiveUrl = null, 300);
+                                      },
+                                      imageGalleryNext(){
+                                          if(this.imageGalleryImageIndex == this.$refs.gallery.childElementCount){
+                                              this.imageGalleryImageIndex = 1;
+                                          } else {
+                                              this.imageGalleryImageIndex = parseInt(this.imageGalleryImageIndex) + 1;
+                                          }
+                                          this.imageGalleryActiveUrl = this.$refs.gallery.querySelector('[data-index=\'' + this.imageGalleryImageIndex + '\']').src;
+                                      },
+                                      imageGalleryPrev() {
+                                          if(this.imageGalleryImageIndex == 1){
+                                              this.imageGalleryImageIndex = this.$refs.gallery.childElementCount;
+                                          } else {
+                                              this.imageGalleryImageIndex = parseInt(this.imageGalleryImageIndex) - 1;
+                                          }
+                              
+                                          this.imageGalleryActiveUrl = this.$refs.gallery.querySelector('[data-index=\'' + this.imageGalleryImageIndex + '\']').src;
+                                          
+                                      }
+                                  }" @image-gallery-next.window="imageGalleryNext()" @image-gallery-prev.window="imageGalleryPrev()" @keyup.right.window="imageGalleryNext();" @keyup.left.window="imageGalleryPrev();" x-init="
+                                      imageGalleryPhotos = $refs.gallery.querySelectorAll('img');
+                                      for(let i=0; i<imageGalleryPhotos.length; i++){
+                                          imageGalleryPhotos[i].setAttribute('data-index', i+1);
+                                      }
+                                  " class="w-full h-full select-none">
+                                  <div class="max-w-6xl mx-auto duration-1000 delay-300 opacity-0 select-none ease animate-fade-in-view" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+                                    <ul x-ref="gallery" id="gallery" class="grid grid-cols-2 gap-5 lg:grid-cols-5">
+                                      <li><img x-on:click="imageGalleryOpen" src="https://images.pexels.com/photos/2356059/pexels-photo-2356059.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 01"></li>
+                              
+                                      <li><img x-on:click="imageGalleryOpen" src="https://images.pexels.com/photos/3618162/pexels-photo-3618162.jpeg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 07"></li>
+                                      <li><img x-on:click="imageGalleryOpen" src="https://images.unsplash.com/photo-1689217634234-38efb49cb664?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 08"></li>
+                                      <li><img x-on:click="imageGalleryOpen" src="https://images.unsplash.com/photo-1520350094754-f0fdcac35c1c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 09"></li>
+                                      <li><img x-on:click="imageGalleryOpen" src="https://cdn.devdojo.com/images/june2023/mountains-10.jpeg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 10"></li>
+                                      <li><img x-on:click="imageGalleryOpen" src="https://cdn.devdojo.com/images/june2023/mountains-06.jpeg" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 06"></li>
+                                      <li><img x-on:click="imageGalleryOpen" src="https://images.pexels.com/photos/1891234/pexels-photo-1891234.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 07"></li>
+                                      
+                                      <li><img x-on:click="imageGalleryOpen" src="https://images.unsplash.com/photo-1529655683826-aba9b3e77383?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1965&q=80" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 08"></li>
+                                      <li><img x-on:click="imageGalleryOpen" src="https://images.pexels.com/photos/4256852/pexels-photo-4256852.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 09"></li>
+                                      <li><img x-on:click="imageGalleryOpen" src="https://images.unsplash.com/photo-1541795083-1b160cf4f3d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80" class="object-cover select-none w-full h-auto bg-gray-200 rounded cursor-zoom-in aspect-[5/6] lg:aspect-[2/3] xl:aspect-[3/4]" alt="photo gallery image 10"></li>
+                                    </ul>
+                                  </div>
+                                  <template x-teleport="body">
+                                    <div x-show="imageGalleryOpened" x-transition:enter="transition ease-in-out duration-300" x-transition:enter-start="opacity-0" x-transition:leave="transition ease-in-in duration-300" x-transition:leave-end="opacity-0" @click="imageGalleryClose" @keydown.window.escape="imageGalleryClose" x-trap.inert.noscroll="imageGalleryOpened" class="fixed inset-0 z-[99] flex items-center justify-center bg-black bg-opacity-50 select-none cursor-zoom-out" x-cloak>
+                                      <div class="relative flex items-center justify-center w-11/12 xl:w-4/5 h-11/12">
+                                        <div @click="$event.stopPropagation(); $dispatch('image-gallery-prev')" class="absolute left-0 flex items-center justify-center text-white translate-x-10 rounded-full cursor-pointer xl:-translate-x-24 2xl:-translate-x-32 bg-white/10 w-14 h-14 hover:bg-white/20">
+                                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                          </svg>
+                                        </div>
+                                        <img x-show="imageGalleryOpened" x-transition:enter="transition ease-in-out duration-300" x-transition:enter-start="opacity-0 transform scale-50" x-transition:leave="transition ease-in-in duration-300" x-transition:leave-end="opacity-0 transform scale-50" class="object-contain object-center w-full h-full select-none cursor-zoom-out" :src="imageGalleryActiveUrl" alt="" style="display: none;">
+                                        <div @click="$event.stopPropagation(); $dispatch('image-gallery-next');" class="absolute right-0 flex items-center justify-center text-white -translate-x-10 rounded-full cursor-pointer xl:translate-x-24 2xl:translate-x-32 bg-white/10 w-14 h-14 hover:bg-white/20">
+                                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                          </svg>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </template>
+                                </div>
+                              
+                              </section>
+                            <!-- youtube end -->
+
+            </div>
+            <div class="w-full px-4 lg:w-1/3">
+                <div class="mb-2 border-b border-primary">
+                    <p class="font-semibold text-xl text-primary">Info apa</p>
+                </div>
+                <div class="overflow-hidden w-full h-fit rounded-lg shadow-black shadow-lg">
+                    <img src="dist/ini.jpeg" alt="" class="">
+                </div>
+<!-- KEPALA DINAS -->
+                <div class="mb-2 border-b border-primary mt-8">
+                    <p class="font-semibold text-xl text-primary">Pengantar Kepala Dinas</p>
+                </div>
+                <div class="overflow-hidden w-full rounded-lg shadow-black shadow-lg h-fit">
+                    <div class="w-full h-full bg-gray-100 px-10 py-10">
+                        <div class="relative mt-16 max-w-sm mx-auto">
+                            <div class="rounded overflow-hidden shadow-md bg-white">
+                                <div class="absolute -mt-20 w-full flex justify-center">
+                                    <div class="h-32 w-32">
+                                        <img src="dist/sekdin.jpeg" class="rounded-full object-cover h-full w-full shadow-md" />
+                                    </div>
+                                </div>
+                                <div class="px-6 mt-16">
+                                    <h1 class="font-bold text-lg text-center mb-1">TUTUG EDI UTOMO</h1>
+                                    <p class="text-gray-800 text-sm text-center">Plt. KEPALA DINAS</p>
+                                    <p class="text-center italic text-gray-600 text-base pt-3 font-normal">
+                                        "Sehat dimulai dari saya, anda dan kita semua."
+                                    </p>
+                                    <div class="w-full flex justify-center pt-5 pb-5">
+                                        <a href="#" class="mx-5">
+                                            <div aria-label="Github">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                                    fill="none" stroke="#718096" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" class="feather feather-github">
+                                                    <path
+                                                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                                    </path>
+                                                </svg>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="mx-5">
+                                            <div aria-label="Twitter">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                                    fill="none" stroke="#718096" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" class="feather feather-twitter">
+                                                    <path
+                                                        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                                                    </path>
+                                                </svg>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="mx-5">
+                                            <div aria-label="Instagram">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                                    fill="none" stroke="#718096" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" class="feather feather-instagram">
+                                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                                </svg>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+<!-- PENANGGUNG JAWAB PENGADUAN -->
+                <div class="mb-2 border-b border-primary mt-8">
+                    <p class="font-semibold text-xl text-primary">Pejabat Pengelola Pengaduan</p>
+                </div>
+                <div class="overflow-hidden w-full rounded-lg shadow-black shadow-lg h-fit">
+                    <div class="w-full h-full bg-gray-100 px-1 pt-3">
+
+
+                        <div class="max-w-full mx-7 py-6 shadow-sm shadow-black text-center bg-slate-100 rounded-lg lg:mt-0 xl:px-10">
+                            <div class="space-y-4 xl:space-y-6">
+                                <img class="mx-auto rounded-full h-36 w-36" src="dist/sekdin.jpeg" alt="author avatar">
+                                <div class="space-y-2">
+                                    <div class="flex justify-center items-center flex-col space-y-3 text-lg font-medium leading-6">
+                                        <h3 class="text-primary text-base font-semibold shadow-md shadow-black rounded-md px-3">dr. DEWI VIRONICA, M.Epid</h3>
+                                        <p class="text-black">Sekretaris</p>
+                                        <div class="flex justify-center mt-5 space-x-5"><a href="#" target="_blank" rel="noopener noreferrer"
+                                                class="inline-block text-gray-400"><span class="sr-only">Twitter</span><svg
+                                                    stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
+                                                    class="w-6 h-6 text-gray-400 hover:text-gray-100" height="1em" width="1em"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z">
+                                                    </path>
+                                                </svg></a><a href="#" target="_blank" rel="noopener noreferrer"
+                                                class="inline-block text-gray-400"><span class="sr-only">GitHub</span><svg stroke="currentColor"
+                                                    fill="currentColor" stroke-width="0" viewBox="0 0 496 512"
+                                                    class="w-6 h-6 text-gray-400 hover:text-gray-100" height="1em" width="1em"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z">
+                                                    </path>
+                                                </svg></a>
+                                            <a href="#" target="_blank" rel="noopener noreferrer"
+                                                class="inline-block text-gray-400"><span class="sr-only">Linkedin</span><svg
+                                                    stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512"
+                                                    class="w-6 h-6 text-gray-400 hover:text-gray-100" height="1em" width="1em"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z">
+                                                    </path>
+                                                </svg></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- psc -->
+                        <div class="w-full items-center justify-center px-1 my-9">
+                            <div class="w-full bg-white shadow-xl shadow-primary rounded-3xl overflow-hidden">
+                                <img src="dist/psc.jpeg" alt="">
+                            </div>
+                        </div>
+                        <!-- lapor kanda -->
+                        <div class="w-full items-center justify-center px-1 my-9">
+                            <div class="w-full bg-white shadow-xl shadow-primary rounded-3xl overflow-hidden">
+                                <img src="dist/kanda.jpg" alt="">
+                            </div>
+                        </div>
+                        <!-- lapor kanda -->
+                        <div class="w-full items-center justify-center px-1 my-9">
+                            <div class="w-full bg-white shadow-xl shadow-primary rounded-3xl overflow-hidden">
+                                <img src="dist/lapor.jpg" alt="">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+<!-- END PENANGGUNG JAWAB PENGADUAN -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- About end -->
+
+<!-- blog start -->
+
+<!-- component -->
+<div class="relative pt-2 lg:pt-2 min-h-screen">
+    <h2 class="flex flex-row flex-nowrap items-center mt-24 w-full">
+        <span class="flex-grow block border-t border-black"></span>
+        <span class="flex-none block mx-4 px-4 py-2.5 text-xl rounded leading-none font-medium bg-primary text-white">
+            Pengumunan
+        </span>
+        <span class="flex-grow block border-t border-black"></span>
+    </h2>
+    <div class="bg-cover w-full flex justify-center items-center"
+        style="background-image: url('/images/mybackground.jpeg');">
+        <div class="w-full bg-white p-5  bg-opacity-40 backdrop-filter backdrop-blur-lg">
+            <div class="w-12/12 mx-auto rounded-2xl bg-white p-5 bg-opacity-40 backdrop-filter backdrop-blur-lg">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-center px-2 mx-auto">
+  
+                    <article
+                        class="bg-white  p-6 mb-6 shadow transition duration-300 group transform hover:-translate-y-2 hover:shadow-2xl rounded-2xl cursor-pointer border">
+                        <a target="_self" href="/blog/slug"
+                            class="absolute opacity-0 top-0 right-0 left-0 bottom-0"></a>
+                        <div class="relative mb-4 rounded-2xl">
+                            <img class="max-h-80 rounded-2xl w-full object-cover transition-transform duration-300 transform group-hover:scale-105"
+                                src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
+                            <div
+                                class="absolute bottom-3 left-3 inline-flex items-center rounded-lg bg-white p-2 shadow-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-red-700">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                                <span class="ml-1 text-sm text-slate-400">2</span>
+
+                            </div>
+
+                            <a class="flex justify-center items-center bg-primary bg-opacity-80 z-10 absolute top-0 left-0 w-full h-full text-white rounded-2xl opacity-0 transition-all duration-300 transform group-hover:scale-105 text-xl group-hover:opacity-100"
+                                href="/blog/slug" target="_self" rel="noopener noreferrer">
+                                Read article
+                                <svg class="ml-2 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="flex justify-between items-center w-full pb-4 mb-auto">
+                            <div class="flex items-center">
+                                <div class="pr-3">
+                                    <img class="h-12 w-12 rounded-full object-cover" src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                        alt="">
+                                </div>
+                                <div class="flex flex-1">
+                                    <div class="">
+                                        <p class="text-sm font-semibold ">Morris Muthigani</p>
+                                        <p class="text-sm text-gray-500">Published on 19/03/2024</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-end">
+                                <div class="text-sm flex items-center text-gray-500 ">
+                                    2 Days ago
+                                    <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="font-medium text-xl leading-8">
+                            <a href="/blog/slug"
+                                class="block relative group-hover:text-primary transition-colors duration-200 ">
+                                Instant Help at Your Fingertips
+                            </a>
+                        </h3>
+                        <div>
+                        </div>
+                    </article>
+
+<article
+                        class="bg-white  p-6 mb-6 shadow transition duration-300 group transform hover:-translate-y-2 hover:shadow-2xl rounded-2xl cursor-pointer border">
+                        <a target="_self" href="/blog/slug"
+                            class="absolute opacity-0 top-0 right-0 left-0 bottom-0"></a>
+                        <div class="relative mb-4 rounded-2xl">
+                            <img class="max-h-80 rounded-2xl w-full object-cover transition-transform duration-300 transform group-hover:scale-105"
+                                src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
+                            <div
+                                class="absolute bottom-3 left-3 inline-flex items-center rounded-lg bg-white p-2 shadow-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-red-700">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                                <span class="ml-1 text-sm text-slate-400">2</span>
+
+                            </div>
+
+                            <a class="flex justify-center items-center bg-red-700 bg-opacity-80 z-10 absolute top-0 left-0 w-full h-full text-white rounded-2xl opacity-0 transition-all duration-300 transform group-hover:scale-105 text-xl group-hover:opacity-100"
+                                href="/blog/slug" target="_self" rel="noopener noreferrer">
+                                Read article
+                                <svg class="ml-2 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="flex justify-between items-center w-full pb-4 mb-auto">
+                            <div class="flex items-center">
+                                <div class="pr-3">
+                                    <img class="h-12 w-12 rounded-full object-cover" src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                        alt="">
+                                </div>
+                                <div class="flex flex-1">
+                                    <div class="">
+                                        <p class="text-sm font-semibold ">Morris Muthigani</p>
+                                        <p class="text-sm text-gray-500">Published on 19/03/2024</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-end">
+                                <div class="text-sm flex items-center text-gray-500 ">
+                                    2 Days ago
+                                    <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="font-medium text-xl leading-8">
+                            <a href="/blog/slug"
+                                class="block relative group-hover:text-red-700 transition-colors duration-200 ">
+                                Instant Help at Your Fingertips
+                            </a>
+                        </h3>
+                        <div>
+                        </div>
+                    </article>
+
+
+                    <article
+                        class="bg-white  p-6 mb-6 shadow transition duration-300 group transform hover:-translate-y-2 hover:shadow-2xl rounded-2xl cursor-pointer border">
+                        <a target="_self" href="/blog/slug"
+                            class="absolute opacity-0 top-0 right-0 left-0 bottom-0"></a>
+                        <div class="relative mb-4 rounded-2xl">
+                            <img class="max-h-80 rounded-2xl w-full object-cover transition-transform duration-300 transform group-hover:scale-105"
+                                src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
+                            <div
+                                class="absolute bottom-3 left-3 inline-flex items-center rounded-lg bg-white p-2 shadow-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-red-700">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                                <span class="ml-1 text-sm text-slate-400">2</span>
+
+                            </div>
+
+                            <a class="flex justify-center items-center bg-red-700 bg-opacity-80 z-10 absolute top-0 left-0 w-full h-full text-white rounded-2xl opacity-0 transition-all duration-300 transform group-hover:scale-105 text-xl group-hover:opacity-100"
+                                href="/blog/slug" target="_self" rel="noopener noreferrer">
+                                Read article
+                                <svg class="ml-2 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="flex justify-between items-center w-full pb-4 mb-auto">
+                            <div class="flex items-center">
+                                <div class="pr-3">
+                                    <img class="h-12 w-12 rounded-full object-cover" src="https://images.pexels.com/photos/163097/twitter-social-media-communication-internet-network-163097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                        alt="">
+                                </div>
+                                <div class="flex flex-1">
+                                    <div class="">
+                                        <p class="text-sm font-semibold ">Morris Muthigani</p>
+                                        <p class="text-sm text-gray-500">Published on 19/03/2024</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-end">
+                                <div class="text-sm flex items-center text-gray-500 ">
+                                    2 Days ago
+                                    <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="font-medium text-xl leading-8">
+                            <a href="/blog/slug"
+                                class="block relative group-hover:text-red-700 transition-colors duration-200 ">
+                                Instant Help at Your Fingertips
+                            </a>
+                        </h3>
+                        <div>
+                        </div>
+                    </article>
+                 
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- blog end -->
+
+
+<!-- Portfolio start -->
+<section id="portfolio" class="pt-36 pb-16">
+    <div class="container bg-slate-500">
+        <div class="flex w-full px-4">
+            <div class="max-w-xl mx-auto text-center mb-16">
+                <h4 class="font-semibold text-lg text-primary mb-2">Portfolio</h4>
+                <h2 class="font-bold text-dark text-3xl mb-4">Project Terbaru</h2>
+                <p class="font-medium text-md">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum ipsa sequi optio velit nobis adipisci.</p>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap justify-center">
+            <div class="w-full mb-12 p-4">
+                <div class="rounded-md shadow-2xl overflow-hidden">
+                    <img src="dist/izzy.jpg" alt="Landing Page" class="object-center h-48 w-60" />
+                    <h3 class="font-semibold text-xl text-dark mt-5 mb-3">Landing Page</h3>
+                    <p class="font-medium text-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem blanditiis enim maxime perferendis.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Portfolio end -->
+
+<!-- Kontak Section Start -->
+<section id="contact" class="pt-36 pb-32">
+    <div class="container">
+        <div class="w-full px-4">
+            <div class="max-w-xl mx-auto text-center mb-16">
+                <h4 class="font-semibold text-lg text-primary mb-2">
+                    Contact
+                </h4>
+                <h2 class="font-bold text-dark text-3xl mb-4">
+                    Hubungi Kami
+                </h2>
+                <p class="font-meduim text-md">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed nam aliquid aspernatur.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- Kontak Section End -->
+
+<!-- Footer Start -->
+
+<footer class="bg-dark pt-24 pb-5">
+    <div class="xl:container">
+        <div class="flex flex-wrap">
+            <div class="px-4 text-slate-300 font-medium w-1/3">
+                <h2>Dinas Kesehatan</h2>
+                <h3>Hubungi Kami</h3>
+                <p>dinkes@probolinggokab.go.id</p>
+                <p>Jl. Panglima Sudirman Nomor 123</p>
+                <p>Probolinggo</p>
+            </div>
+            <div class="w-1/3 px-4 mb-12">
+                <h3 class="font-semibold text-xl text-white mb-5">Tautan</h3>
+                <ul class="text-slate-300">
+                    <li>
+                        <a href="#" class="inline-block text-base hover:text-primary mb-3">
+                            Kematian
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="inline-block text-base hover:text-primary mb-3">
+                            Kelahiran
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="inline-block text-base hover:text-primary mb-3">
+                            Uspro
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="w-1/3 px-4 mb-12">
+                <h3 class="font-semibold text-xl text-white mb-5">Tautan</h3>
+                <ul class="text-slate-300">
+                    <li>
+                        <a href="#" class="inline-block text-base hover:text-primary mb-3">
+                            Kematian
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="inline-block text-base hover:text-primary mb-3">
+                            Kelahiran
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="inline-block text-base hover:text-primary mb-3">
+                            Uspro
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="w-full pt-6 border-t border-slate-100">
+            <div class="flex items-center justify-center mb-5">
+                <!-- youtube -->
+                <a href="#" target="_blank" class="text-white w-9 h-9 mr-3 rounded-full flex justify-center items-center border border-slate-300 hover:border-primary hover:bg-primary hover:text-white">
+                    <svg role="img" width="20" class="fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>YouTube</title><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+                <a href="#" target="_blank" class="text-white w-9 h-9 mr-3 rounded-full flex justify-center items-center border border-slate-300 hover:border-primary hover:bg-primary hover:text-white">
+                    <svg role="img" width="20" class="fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg>
+                </a>
+                <a href="#" target="_blank" class="text-white w-9 h-9 mr-3 rounded-full flex justify-center items-center border border-slate-300 hover:border-primary hover:bg-primary hover:text-white">
+                    <svg role="img" width="20" class="fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>TikTok</title><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                </a>
+            </div>
+            <p class="text-center text-white text-xs">
+                © 2024. Bidang Perencanaan - Dinas Kesehatan Kabupaten Probolinggo
+            </p>
+        </div>
+    </div>
+
+</footer>
+<!-- Footer End -->
+
+
+<!--Start percobaan-->
+<script src="//unpkg.com/alpinejs"></script>
+<nav x-data="{
+    navigationMenuOpen: false,
+    navigationMenu: '',
+    navigationMenuCloseDelay: 200,
+    navigationMenuCloseTimeout: null,
+    navigationMenuLeave() {
+    let that = this;
+    this.navigationMenuCloseTimeout = setTimeout(() => {
+    that.navigationMenuClose();
+    }, this.navigationMenuCloseDelay);
+    },
+    navigationMenuReposition(navElement) {
+    this.navigationMenuClearCloseTimeout();
+    this.$refs.navigationDropdown.style.left = navElement.offsetLeft + 'px';
+    this.$refs.navigationDropdown.style.marginLeft = (navElement.offsetWidth/2) + 'px';
+    },
+    navigationMenuClearCloseTimeout(){
+    clearTimeout(this.navigationMenuCloseTimeout);
+    },
+    navigationMenuClose(){
+    this.navigationMenuOpen = false;
+    this.navigationMenu = '';
+    }
+    }"
+    class="relative z-10 w-auto">
+    <div class="relative">
+        <ul class="flex items-center justify-center flex-1 p-1 space-x-1 list-none border rounded-md text-neutral-700 group border-neutral-200/80">
+            <li>
+                <button :class="{ 'bg-neutral-100' : navigationMenu=='learn-more', 'hover:bg-neutral-100' : navigationMenu!='learn-more' }" @mouseover="navigationMenuOpen=true; navigationMenuReposition($el); navigationMenu='learn-more'" @mouseleave="navigationMenuLeave()" class="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium transition-colors rounded-md hover:text-neutral-900 focus:outline-none disabled:opacity-50 disabled:pointer-events-none bg-background hover:bg-neutral-100 group w-max">
+                <span>Learn More</span>
+                <svg :class="{ '-rotate-180' : navigationMenuOpen==true && navigationMenu == 'learn-more' }" class="relative top-[1px] ml-1 h-3 w-3 ease-out duration-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+            </li>
+            <li>
+                <a href="#_" class="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium transition-colors rounded-md hover:text-neutral-900 focus:outline-none disabled:opacity-50 disabled:pointer-events-none bg-background hover:bg-neutral-100 group w-max">
+                Documentation
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div x-ref="navigationDropdown" x-show="navigationMenuOpen"
+        x-transition:enter="transition ease-out duration-100"
+        x-transition:enter-start="opacity-0 scale-90"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-100"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-90"
+        @mouseover="navigationMenuClearCloseTimeout()" @mouseleave="navigationMenuLeave()"
+        class="absolute top-0 pt-3 duration-200 ease-out -translate-x-1/2 translate-y-11" x-cloak>
+        <div class="flex justify-center w-auto h-auto overflow-hidden bg-white border rounded-md shadow-sm border-neutral-200/70">
+
+            <div x-show="navigationMenu == 'learn-more'" class="flex items-stretch justify-center w-full p-6">
+                <div class="w-72">
+                    <a href="#_" @click="navigationMenuClose()" class="block px-3.5 py-3 text-sm rounded hover:bg-neutral-100">
+                        <span class="block mb-1 font-medium text-black">Tailwind CSS</span>
+                    </a>
+                    <a href="#_" @click="navigationMenuClose()" class="block px-3.5 py-3 text-sm rounded hover:bg-neutral-100">
+                        <span class="block mb-1 font-medium text-black">Laravel</span>
+                    </a>
+                    <a href="#_" @click="navigationMenuClose()" class="block px-3.5 py-3 text-sm rounded hover:bg-neutral-100">
+                        <span class="block mb-1 font-medium text-black">Pines UI</span>
+                    </a>
+                    <a href="#_" @click="navigationMenuClose()" class="block px-3.5 py-3 text-sm rounded hover:bg-neutral-100">
+                        <span class="block mb-1 font-medium text-black">ApineJS</span>
+                    </a>
+                    <a href="#_" @click="navigationMenuClose()" class="block px-3.5 py-3 text-sm rounded hover:bg-neutral-100">
+                        <span class="block mb-1 font-medium text-black">Livewire</span>
+                    </a>
+                    <a href="#_" @click="navigationMenuClose()" class="block px-3.5 py-3 text-sm rounded hover:bg-neutral-100">
+                        <span class="block mb-1 font-medium text-black">Tails</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<!--End percobaan-->
+
+
+</div>
+<script src="dist/js/script.js"></script>
+
+</body>
+</html>
